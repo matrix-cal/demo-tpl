@@ -10,7 +10,7 @@ import java.util.Arrays;
  * @author weiqi
  * @create 2018-04-18 8:56:00
  */
-public class Demo003 {
+public class AppDemo003 {
 
     public static void main(String[] args) {
         StringBuffer sb = new StringBuffer();

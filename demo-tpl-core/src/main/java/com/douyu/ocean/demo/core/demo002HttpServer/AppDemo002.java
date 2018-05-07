@@ -11,7 +11,7 @@ import com.sun.net.httpserver.HttpServer;
  * @author weiqi
  * @create 2018-04-18 8:56:00
  */
-public class Demo002 {
+public class AppDemo002 {
 
     public static String testMethod(int id, String name) {
         System.out.println("testMethod-01");

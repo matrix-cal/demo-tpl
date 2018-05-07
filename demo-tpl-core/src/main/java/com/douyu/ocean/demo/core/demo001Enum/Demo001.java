@@ -1,4 +1,4 @@
-package com.douyu.ocean.demo.core.demo001;
+package com.douyu.ocean.demo.core.demo001Enum;
 
 /**
  * Demo000

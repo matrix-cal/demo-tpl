@@ -1,4 +1,4 @@
-package com.douyu.ocean.demo.core.demo002;
+package com.douyu.ocean.demo.core.demo002HttpServer;
 
 import java.io.IOException;
 import java.io.InputStream;

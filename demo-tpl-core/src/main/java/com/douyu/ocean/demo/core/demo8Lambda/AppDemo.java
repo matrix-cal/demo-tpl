@@ -1,8 +1,8 @@
 package com.douyu.ocean.demo.core.demo8Lambda;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Demo000
@@ -12,41 +12,34 @@ import java.io.IOException;
  */
 public class AppDemo {
 
-    public static void test() {
-        try {
-            System.out.println("i am in try01");
-            System.out.println(1 / 0);
-            System.out.println("i am in try02");
-        } catch (Exception e) {
-            System.out.println("i am in catch");
-        } finally {
-            System.out.println("i am in finally");
-        }
-        System.out.println("i am in out");
+
+    public static void test01() {
+        List<String> list = Arrays.asList("a", "b", "d");
+        // 极简模式
+        System.out.println("#####极简模式");
+        list.forEach(s -> System.out.println(s));
+
+        // 带参数类型模式
+        System.out.println("#####带参数类型模式");
+        list.forEach((String e) -> System.out.println(e));
+
+        // 多条处理语句
+        System.out.println("#####多条处理语句");
+        list.forEach(e -> {
+            System.out.print(e);
+            System.out.println(e);
+        });
+
+        System.out.println("#####");
+
     }
 
-    /**
-     * try-with-resources与try一样，可以与catch和finally一起使用，catch/finally会在try-with-resources自动关闭资源之后执行。
-     * @throws IOException
-     */
-    public static void test2() {
-        System.out.println("i am in in");
-        try (BufferedReader br = new BufferedReader(new FileReader("D:/session.xts"))) {
-            System.out.println(br.readLine());
-            System.out.println("i am in try01");
-            System.out.println(1/0);
-            System.out.println("i am in try02");
-        } catch (Exception e) {
-            System.out.println("i am in catch");
-            e.printStackTrace();
-        } finally {
-            System.out.println("i am in finally");
-        }
-        System.out.println("i am in out");
+    public static void test02() {
+
     }
 
 
     public static void main(String[] args) throws IOException {
-        test2();
+        test01();
     }
 }

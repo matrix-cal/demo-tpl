@@ -1,6 +1,6 @@
 package com.douyu.ocean.demo.core;
 
-import com.douyu.ocean.demo.core.demo003Annotation.AppDemo003;
+import com.douyu.ocean.demo.core.demo003Annotation.AppDemo;
 
 /**
  * ApplicationLauncher
@@ -12,7 +12,7 @@ public class ApplicationLauncher {
 
     public static void main(String[] args) {
         System.out.println("hello demo-tpl");
-        AppDemo003 demo003 = new AppDemo003();
+        AppDemo demo003 = new AppDemo();
         demo003.test();
     }
 }

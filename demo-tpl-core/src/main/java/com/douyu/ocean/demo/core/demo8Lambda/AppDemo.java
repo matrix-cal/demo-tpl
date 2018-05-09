@@ -30,6 +30,18 @@ public class AppDemo {
             System.out.println(e);
         });
 
+        // 隐式转换变量为final
+        int firstWord = 1;
+        System.out.println("#####test");
+        // firstWord = 2;
+        list.forEach(e -> {
+            System.out.println(firstWord + e);
+        });
+
+        // 自动推断return 返回值
+        System.out.println("#####自动推断return 返回值");
+        list.sort((e1, e2) -> -e1.compareTo(e2));
+        list.forEach(e -> System.out.println(e));
         System.out.println("#####");
 
     }

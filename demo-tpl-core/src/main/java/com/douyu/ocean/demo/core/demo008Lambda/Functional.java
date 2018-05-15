@@ -1,4 +1,4 @@
-package com.douyu.ocean.demo.core.demo8Lambda;
+package com.douyu.ocean.demo.core.demo008Lambda;
 
 public interface Functional {
     void method();

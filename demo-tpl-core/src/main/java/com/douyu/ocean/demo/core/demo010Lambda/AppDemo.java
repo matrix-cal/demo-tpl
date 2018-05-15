@@ -1,4 +1,4 @@
-package com.douyu.ocean.demo.core.demo8Lambda;
+package com.douyu.ocean.demo.core.demo010Lambda;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -46,16 +46,9 @@ public class AppDemo {
 
     }
 
-    public static void test02() {
-        Functional demo01 = new DemoImpl01();
-        Functional demo02 = new DemoImpl02();
-        demo01.defaultMethod01();
-        demo02.defaultMethod01();
-    }
 
 
     public static void main(String[] args) throws IOException {
 //        test01();
-        test02();
     }
 }

@@ -1,4 +1,4 @@
-package com.douyu.ocean.demo.core.demo8Lambda;
+package com.douyu.ocean.demo.core.demo008Lambda;
 
 import java.io.IOException;
 import java.util.Arrays;

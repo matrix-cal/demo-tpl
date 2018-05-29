@@ -3,6 +3,11 @@ package com.douyu.ocean.demo.core.demo010Lambda;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /**
  * Demo000
@@ -15,84 +20,58 @@ public class AppDemo {
 
     public static void test01() {
         List<String> list = Arrays.asList("d", "b", "a", "c");
-        /*
-        // 匿名函数, 类是确定的, 方法又只有一个, 所以可以用lambda表达式
-        // 官方说法: 任意只包含一个抽象方法的接口，我们都可以用来做成lambda表达式, 加上@FunctionalInterface 标注
-        // 由于默认方法不是抽象的，因此你可以在你的函数式接口里任意添加默认方法
-        System.out.println("#####匿名函数");
-        Collections.sort(list, new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                return o1.compareTo(o2);
+
+        //# 2个 参数, 有返回值 (加Bi的都是2个参数的)
+        BiFunction<String, String, Integer> bit = (x, y) ->{
+            System.out.println(x + y);
+            return 0;
+        };
+        bit.apply("1  params", " & 1  return");
+
+        //# 无参数, 无返回值
+        Runnable runable = ()-> {
+            System.out.println("no params & no return");
+        };
+        runable.run();
+        //# ############################################################
+
+        //# 无 参数, 有返回值
+        Predicate<Integer> predicate = x -> {
+            if (x % 2 == 0) {
+                System.out.println("no  params & 1  return");
+                return true;
             }
-        });
-        list.forEach(s -> System.out.println(s));
-        */
-
-        /*
-        // Lambda-01
-        System.out.println("#####Lambda-01");
-        Collections.sort(list, (s1, s2) -> {
-            return s1.compareTo(s2);
-        });
-        list.forEach(s -> System.out.println(s));
-        */
-
-        /*
-        // Lambda-02
-        System.out.println("#####Lambda-02");
-        Collections.sort(list, (s1, s2) -> s1.compareTo(s2));
-        list.forEach(s -> System.out.println(s));
-        */
-
-        /*
-        // 自定义函数式接口
-        System.out.println("#####FunctionalInterface-01");
-        ConverterFactory cf = new ConverterFactory() {
-            @Override
-            public Object convert(Object from) {
-                return null;
-            }
+            return false;
         };
-        ConverterFactory<String, Integer> cf2 = (from) -> Integer.parseInt(from);
-        Integer convertNum = cf2.convert("100");
-        System.out.println(++convertNum);
-        */
+        predicate.test(1);
+        //predicate.and();
 
-        /*
-        // 静态方法引用
-        System.out.println("#####Colon-01");
-        ConverterFactory<String, Integer> cf2 =Integer::parseInt;
-        Integer convertNum = cf2.convert("100");
-        System.out.println(++convertNum);
-
-        */
-
-        /*
-        // 有一个参数，并且无返回值
-        System.out.println("##### One param no return ");
-        Consumer<Integer> consumer = (x) -> System.out.println(x);
-        consumer.accept(5);
-        */
-
-        /*
-        // 有一个参数，并且有返回值
-        System.out.println("##### One param one return ");
-        Function<String, Integer> fun = (from) -> {
-            int result = Integer.parseInt(from);
-            return result;
+        //# 有一个参数, 无返回值
+        Consumer<String> consumer = (x) -> {
+            System.out.println(x);
         };
-        System.out.println(fun.apply("100") + 1);
-        */
-        /*
-        // 两参数，并且有返回值
-        System.out.println("##### Two param one return ");
-        BiFunction<Integer, Integer, String> fun = (param1, param2) -> {
-            String result = param1 + param2 +"";
-            return result;
+        consumer.accept("1  params & no return");
+        // consumer.andThen()
+
+        //# 有一个参数，并且有返回值
+        Function<String, Integer> function = s -> {
+            System.out.println(s);
+            return 0;
         };
-        System.out.println(fun.apply(1, 2) + 1);
-        */
+        Integer retVal = function.apply("1  params & 1  return");
+        //function.compose();
+        //function.andThen()
+
+        //# 有一个参数，并且有返回值
+        Supplier<String> supplier = () -> {
+            return "no params & 1  return";
+        };
+        String soutInfo = supplier.get();
+        System.out.println(soutInfo);
+        // no other function
+
+
+
 
     }
 

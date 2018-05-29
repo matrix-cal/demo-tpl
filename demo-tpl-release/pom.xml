@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>demo-tpl</artifactId>
+        <groupId>com.douyu.ocean</groupId>
+        <version>1.0.0</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.douyu.ocean</groupId>
+    <artifactId>demo-tpl-release</artifactId>
+    <packaging>pom</packaging>
+
+    <!--指定编码-->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!--<hibernate.version>5.1.10.Final</hibernate.version>-->
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.douyu.ocean</groupId>
+            <artifactId>demo-tpl-core</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
+
+
+
+    <build>
+        <plugins>
+            <!-- 此插件一定要放在maven-assembly-plugin打包插件上面 -->
+          <!--  <plugin>
+                <groupId>com.douyu.ocean</groupId>
+                <artifactId>detonator</artifactId>
+                <version>2.2.1</version>
+                <configuration>
+                    <scriptFileName>${project.parent.name}</scriptFileName>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>detonator</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>-->
+            <!-- 打包插件 -->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <descriptors>
+                        <descriptor>package.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <!-- 拷贝Dockerfile方便Jenkins构建容器 -->
+                    <execution>
+                        <id>copy-docker-resources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>target</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/docker</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                            <encoding>UTF-8</encoding>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- 构建信息 -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>1.5.8.RELEASE</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build-info</goal>
+                        </goals>
+                        <configuration>
+                            <additionalProperties>
+                                <encoding.source>UTF-8</encoding.source>
+                                <encoding.reporting>UTF-8</encoding.reporting>
+                                <os.name>${os.name}</os.name>
+                                <os.version>${os.version}</os.version>
+                                <user.name>${user.name}</user.name>
+                                <java.version>${java.version}</java.version>
+                                <java.home>${java.home}</java.home>
+                                <computername>${java.home}</computername>
+                                <fingerprint>
+                                    ${os.name}--${os.version}--${user.name}--${user.home}--${java.home}--${java.version}--${maven.build.timestamp}
+                                </fingerprint>
+                            </additionalProperties>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>

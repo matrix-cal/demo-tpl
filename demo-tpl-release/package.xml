@@ -1,0 +1,81 @@
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.3"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.3 http://maven.apache.org/xsd/assembly-1.1.3.xsd">
+    <id>package</id>
+    <formats>
+        <!-- <format>dir</format> -->
+        <format>tar.gz</format>
+    </formats>
+    <includeBaseDirectory>true</includeBaseDirectory>
+    <!-- the root-name of dir or targz -->
+    <baseDirectory>demo-tpl</baseDirectory>
+    <fileSets>
+
+        <fileSet>
+            <directory>./target/detonator/bin</directory>
+            <includes>
+                <include>**</include>
+            </includes>
+            <fileMode>0755</fileMode>
+            <outputDirectory>bin</outputDirectory>
+            <lineEnding>unix</lineEnding>
+        </fileSet>
+        <fileSet>
+            <directory>./target/detonator/conf</directory>
+            <includes>
+                <include>**</include>
+            </includes>
+            <fileMode>0644</fileMode>
+            <outputDirectory>conf</outputDirectory>
+            <lineEnding>unix</lineEnding>
+        </fileSet>
+        <fileSet>
+            <directory>./target/detonator/plugins</directory>
+            <includes>
+                <include>**</include>
+            </includes>
+            <outputDirectory>plugins</outputDirectory>
+        </fileSet>
+
+        <!-- udf -->
+        <fileSet>
+            <directory>./src/bin</directory>
+            <includes>
+                <include>**</include>
+            </includes>
+            <fileMode>0755</fileMode>
+            <outputDirectory>bin</outputDirectory>
+            <lineEnding>unix</lineEnding>
+        </fileSet>
+        <fileSet>
+            <directory>./src/conf</directory>
+            <includes>
+                <include>**</include>
+            </includes>
+            <fileMode>0644</fileMode>
+            <outputDirectory>conf</outputDirectory>
+            <lineEnding>unix</lineEnding>
+        </fileSet>
+        <fileSet>
+            <directory>./src/logs</directory>
+            <outputDirectory>logs</outputDirectory>
+            <excludes>
+                <exclude>*/**</exclude>
+            </excludes>
+        </fileSet>
+        <fileSet>
+            <directory>./src/tmp</directory>
+            <outputDirectory>tmp</outputDirectory>
+            <excludes>
+                <exclude>*/**</exclude>
+            </excludes>
+        </fileSet>
+    </fileSets>
+
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>lib</outputDirectory>
+            <scope>runtime</scope>
+        </dependencySet>
+    </dependencySets>
+</assembly>

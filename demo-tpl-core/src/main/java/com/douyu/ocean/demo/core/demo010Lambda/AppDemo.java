@@ -46,7 +46,7 @@ public class AppDemo {
         predicate.test(1);
         //predicate.and();
 
-        //# 有一个参数, 无返回值
+        //# 有一个参数, 无返回值test
         Consumer<String> consumer = (x) -> {
             System.out.println(x);
         };

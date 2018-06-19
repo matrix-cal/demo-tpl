@@ -28,8 +28,8 @@ public class AppDemo {
         System.out.println(properties.getProperty("os.name"));
 
         // 上述不是环境变量, 只是java运行的一些属性, 真正获取系统环境变量的方法
-        String path = System.getenv("path");
-        // String path = System.getenv("PATH"); 大写小写都可以;
+        String path = System.getenv("PATH");
+        // String path = System.getenv("PATH"); MAC中 path和 PATH不同!!!
         String[] pathItems = path.split((String) properties.get("path.separator"));
         for (String pathItem : pathItems) {
             System.out.println(pathItem);

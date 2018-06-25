@@ -54,8 +54,27 @@ public class AppDemo {
         System.out.println("testMap:"+testMap);
         System.out.println("itemScore:"+itemScore);
 
-        //# filter
-        // userEntityOpt.filter( userEntity1 -> userEntity.)
+        //# map (multi array choice firsrt)
+        ScoreEntity scoreEntity = userEntityOpt
+                .map(entity -> entity.getExamEntityList())
+                .map(examEntityList -> examEntityList.get(0))
+                .map(examEntity1 -> examEntity1.getScoreEntityList())
+                .map(scoreEntities -> scoreEntities.get(0))
+                .orElse(new ScoreEntity(99));
+
+        System.out.println("++++++");
+        System.out.println(scoreEntity.getArticalScore());
+        System.out.println("++++++");
+        List<Integer> itemScoreX = userEntityOpt.map((entity) -> {
+            try {
+                List<Integer> itemScoreResult = entity.getExamEntityList().get(0).getScoreEntityList().get(0).getItemScore();
+                return itemScoreResult;
+            } catch (Exception e) {
+                return null;
+            }
+        }).orElse(null);
+        System.out.println(itemScoreX);
+
     }
 
 

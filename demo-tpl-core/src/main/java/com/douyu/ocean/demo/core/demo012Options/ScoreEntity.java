@@ -11,4 +11,9 @@ public class ScoreEntity {
 
     private List<Integer> itemScore;
 
+    private int articalScore;
+
+    public ScoreEntity(int articalScore) {
+        this.articalScore = articalScore;
+    }
 }

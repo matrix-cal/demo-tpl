@@ -69,7 +69,6 @@ public class AppDemo {
         Integer minVal = list1.stream().min(Integer::compare).orElse(null);
         System.out.println("匹配 minVal:" + minVal);
 
-
         //## 归约 reduce, 得到某个值
         Integer reduceResult1 = list1.stream().reduce(10, Integer::sum);
         System.out.println("reduce1: "+reduceResult1);
@@ -80,7 +79,12 @@ public class AppDemo {
         ConcurrentMap<Integer, Integer> collectMap = list1.stream().collect(Collectors.toConcurrentMap(x -> x, y -> y+1, (x,y) -> x));
         System.out.println("collect: "+collectMap);
 
+        //## test stream惰性, 即就仅仅执行stream()方法并不会跑, 只有执行终止操作时, 才回把数组丢进去
+        Stream<Integer> streamTest = list1.stream();
+        list1.set(0, 12);
+        Integer reduceResultTest = streamTest.reduce(10, Integer::sum);
 
+        System.out.println("reduceTest: "+reduceResultTest);
     }
 
 

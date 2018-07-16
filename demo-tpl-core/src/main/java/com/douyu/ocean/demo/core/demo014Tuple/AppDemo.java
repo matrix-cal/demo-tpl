@@ -1,13 +1,13 @@
 package com.douyu.ocean.demo.core.demo014Tuple;
 
+import java.io.IOException;
+import java.util.AbstractMap;
+import java.util.Map;
+
 import com.google.common.collect.Maps;
 import org.apache.commons.collections.keyvalue.DefaultMapEntry;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
-
-import java.io.IOException;
-import java.util.AbstractMap;
-import java.util.Map;
 
 /**
  * 其实tuple在参数少的时候, 还算可以用, 参数多了的话, 返回后 , 别人使用就有问题了, 还不如封装个数组
@@ -26,7 +26,7 @@ public class AppDemo {
 
 
         //# Apache commons-lang3, 这个好用, 用这个
-        ImmutableTriple<String, Integer, String> tuple_lang3 = new ImmutableTriple<>("test2", 2, "2X");
+        ImmutableTriple<String, Integer, String> tuple_lang3 = ImmutableTriple.of("test2", 2, "2X");
         formatStr = String.format("lang3_1: key=%s, middle=%s, val=%s", tuple_lang3.getLeft(), tuple_lang3.getMiddle(), tuple_lang3.getRight());
         System.out.println(formatStr);
 

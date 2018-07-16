@@ -3,9 +3,7 @@ package com.douyu.ocean.demo.core.demo016ForkJoin;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
-import java.util.concurrent.ThreadFactory;
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,15 +44,15 @@ public class ForkJoinSumRunner extends RecursiveTask<Long> {
             wastCPU(10000_0000_0L);
             return sum;
         } else { // fork
-            LOGGER.info("开始拆分: {} - {}", this.start, this.end);
+            //LOGGER.info("开始拆分: {} - {}", this.start, this.end);
             long cuttedEnd = this.start + CRITICAL_FORK_VAL;
             ForkJoinSumRunner forkJoinSumRunnerPre = new ForkJoinSumRunner(this.start, cuttedEnd);
             ForkJoinSumRunner forkJoinSumRunnerPost = new ForkJoinSumRunner(cuttedEnd+1, this.end);
 
-            forkJoinSumRunnerPre.fork();
-            forkJoinSumRunnerPost.fork();
+            //forkJoinSumRunnerPre.fork();
+            //forkJoinSumRunnerPost.fork();
             // **用invokeAll效率确实提高至少一倍?, 不要用xx.fork()? 暂时无法重现, 感觉都效率差不多 **
-            //invokeAll(forkJoinSumRunnerPre, forkJoinSumRunnerPost);
+            invokeAll(forkJoinSumRunnerPre, forkJoinSumRunnerPost);
             return forkJoinSumRunnerPre.join() + forkJoinSumRunnerPost.join();
 
         }
@@ -81,7 +79,7 @@ public class ForkJoinSumRunner extends RecursiveTask<Long> {
         // fork-join
         long startTime = System.currentTimeMillis();
         //ForkJoinPool pool = new ForkJoinPool(8);
-        ForkJoinPool pool = new ForkJoinPool(8);
+        ForkJoinPool pool = new ForkJoinPool(16);
         ForkJoinSumRunner forkJoinSumRunner = new ForkJoinSumRunner(start, end);
         Long result = pool.invoke(forkJoinSumRunner);
         System.out.println("####### result-fork-join: "+result);
@@ -109,7 +107,7 @@ public class ForkJoinSumRunner extends RecursiveTask<Long> {
     public static void wastCPU(long val) {
         try {
             for (long t = val; t > 0; t--) {
-                Math.sqrt(t);
+                Math.sqrt(Math.sqrt(t));
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -81,13 +81,11 @@ public class ForkJoinSumRunnerFour extends RecursiveTask<Long> {
         // fork-join
         long startTime = System.currentTimeMillis();
         ForkJoinPool pool = new ForkJoinPool(8);
-        System.out.println("####### steal01-fork-join: "+pool.getStealCount());
         ForkJoinSumRunnerFour forkJoinSumRunner = new ForkJoinSumRunnerFour(start, end);
         Long result = pool.invoke(forkJoinSumRunner);
         long endTime = System.currentTimeMillis();
         System.out.println("####### result-fork-join: "+result);
         System.out.println("####### time-fork-join: "+ (endTime - startTime)/1000L +" s");
-        System.out.println("####### steal02-fork-join: "+pool.getStealCount());
 
         // common
         Long resultCommon = sumStartAndEnd(start, end);

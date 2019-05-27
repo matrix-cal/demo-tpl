@@ -14,9 +14,9 @@ ompiled class file
 *.jar
 *.war
 *.ear
-*.zip
-*.tar.gz
-*.rar
+#*.zip
+#*.tar.gz
+#*.rar
 
 #IDEA file
 *.iml

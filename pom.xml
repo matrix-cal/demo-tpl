@@ -118,39 +118,5 @@
         </plugins>
     </build>
 
-    <repositories>
-        <repository>
-            <id>douyu-repo</id>
-            <name>douyu Repository</name>
-            <url>http://maven.ocean.douyu.com/nexus/content/groups/public/</url>
-        </repository>
-    </repositories>
-
-    <distributionManagement>
-        <repository>
-            <id>releases</id>
-            <name>Internal Releases</name>
-
-            <!-- 这个是read的url -->
-            <!--<url>http://maven.ocean.douyu.com/nexus/content/groups/public/</url>-->
-            <!-- 这个是deploy write的url -->
-            <!--<url>http://maven.ocean.douyu.com/nexus/content/repositories/releases/</url>-->
-
-            <url>http://maven.ocean.douyu.com/nexus/content/repositories/releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>snapshots</id>
-            <name>Internal snapshots</name>
-            <url>http://maven.ocean.douyu.com/nexus/content/repositories/snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>douyu-repo</id>
-            <name>douyu Repository</name>
-            <url>http://maven.ocean.douyu.com/nexus/content/groups/public/</url>
-        </pluginRepository>
-    </pluginRepositories>
 
 </project>

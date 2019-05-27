@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration status="OFF" shutdownHook="disable">
     <properties>
-        <property name="ocean.log.dir">D:\\logs</property>
-        <property name="ocean.service.name">train</property>
+        <property name="ocean.log.dir">${sys:app.home:-/tmp}/logs</property>
+        <property name="ocean.service.name">${sys:app.name:-demo}</property>
     </properties>
     <appenders>
         <!-- console debug print -->

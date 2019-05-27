@@ -1,26 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration status="OFF">
+<configuration status="OFF" shutdownHook="disable">
+    <properties>
+        <property name="ocean.log.dir">D:\\logs</property>
+        <property name="ocean.service.name">train</property>
+    </properties>
     <appenders>
-        <Console name="console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{MM-dd HH:mm:ss} | %-5level | %t | %class{36}.%M()_%L: %msg%xEx%n"/>
+        <!-- console debug print -->
+        <Console name="ConsolePrint" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} | %-5level | %t | %class{36}.%M()_%L: %msg%xEx%n" />
         </Console>
+        <!--file show -->
+        <RollingFile name="BusinessFile"
+                     fileName="${ocean.log.dir}/business/${sys:ocean.service.name}.biz.log"
+                     filePattern="${ocean.log.dir}/business/${sys:ocean.service.name}.%d{yyyy-MM-dd}.%i.biz.log">
+            <!-- business type pattern -->
+            <PatternLayout pattern="%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} | %-5level | %traceId | %t | %class{36}.%M()_%L: %msg%xEx%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10">
+                <Delete basePath="${ocean.log.dir}/business" maxDepth="1">
+                    <IfFileName glob="*.log"/>
+                    <IfLastModified age="15d"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
     </appenders>
     <loggers>
-
-        <!--<logger name="org.hibernate.hql.internal.ast.QueryTranslatorImpl" level="INFO" additivity="false">
-            <appender-ref ref="console"/>
-        </logger>-->
-        <logger name="com.douyu" level="INFO" additivity="false">
-            <appender-ref ref="console"/>
-        </logger>
-        <logger name="io.fabric8.kubernetes.client.Config" level="ERROR" additivity="false">
-            <appender-ref ref="console"/>
-        </logger>
-        <logger name="com.mongodb" level="ERROR" additivity="false">
-            <appender-ref ref="console"/>
-        </logger>
         <root level="INFO">
-            <appender-ref ref="console"/>
+            <appender-ref ref="BusinessFile"/>
+            <appender-ref ref="ConsolePrint"/>
         </root>
     </loggers>
 </configuration>

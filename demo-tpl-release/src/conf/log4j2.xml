@@ -1,53 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration status="OFF" shutdownHook="disable">
     <properties>
-        <property name="ocean.log.dir">${sys:ocean.log.dir}</property>
-        <property name="ocean.service.name">${sys:ocean.service.name}</property>
-        <property name="ocean.service.id">${sys:ocean.service.id}</property>
+        <property name="ocean.log.dir">${sys:app.home:-/tmp}/logs</property>
+        <property name="ocean.service.name">${sys:app.name:-demo}</property>
     </properties>
     <appenders>
-        <!--业务日志文件-->
+        <!-- console debug print -->
+        <Console name="ConsolePrint" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} | %-5level | %t | %class{36}.%M()_%L: %msg%xEx%n" />
+        </Console>
+        <!--file show -->
         <RollingFile name="BusinessFile"
-            fileName="${ocean.log.dir}/business/${ocean.service.name}.log"
-            filePattern="${ocean.log.dir}/business/%d{yyyy-MM-dd}.log">
+                     fileName="${ocean.log.dir}/business/${sys:ocean.service.name}.biz.log"
+                     filePattern="${ocean.log.dir}/business/${sys:ocean.service.name}.%d{yyyy-MM-dd}.%i.biz.log">
             <!-- business type pattern -->
-            <PatternLayout pattern="%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} | %-5level | %t | %class{36}.%M()_%L: %msg%xEx%n"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} | %-5level | %traceId | %t | %class{36}.%M()_%L: %msg%xEx%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
             </Policies>
-            <DefaultRolloverStrategy>
+            <DefaultRolloverStrategy max="10">
                 <Delete basePath="${ocean.log.dir}/business" maxDepth="1">
-                    <IfFileName glob="*.log"/>
-                    <IfLastModified age="15d"/>
-                </Delete>
-            </DefaultRolloverStrategy>
-        </RollingFile>
-        <!--方法性能日志文件-->
-        <RollingFile name="MethodFile"
-            fileName="${ocean.log.dir}/method/current.log"
-            filePattern="${ocean.log.dir}/method/%d{yyyy-MM-dd}.log">
-            <PatternLayout pattern="%m%n"/>
-            <Policies>
-                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
-            </Policies>
-            <DefaultRolloverStrategy>
-                <Delete basePath="${ocean.log.dir}/method"
-                    maxDepth="1">
-                    <IfFileName glob="*.log"/>
-                    <IfLastModified age="15d"/>
-                </Delete>
-            </DefaultRolloverStrategy>
-        </RollingFile>
-        <!--Metrics日志文件-->
-        <RollingFile name="MetricsFile"
-            fileName="${ocean.log.dir}/metrics/current.log"
-            filePattern="${ocean.log.dir}/metrics/%d{yyyy-MM-dd}.log">
-            <PatternLayout pattern="%m%n"/>
-            <Policies>
-                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
-            </Policies>
-            <DefaultRolloverStrategy>
-                <Delete basePath="${ocean.log.dir}/metrics" maxDepth="1">
                     <IfFileName glob="*.log"/>
                     <IfLastModified age="15d"/>
                 </Delete>
@@ -55,20 +28,9 @@
         </RollingFile>
     </appenders>
     <loggers>
-        <logger name="com.douyu" level="INFO" additivity="false">
-            <appender-ref ref="BusinessFile"/>
-        </logger>
-        <logger name="MethodStatistic" additivity="false" level="INFO">
-            <appender-ref ref="MethodFile"/>
-        </logger>
-        <logger name="Metrics" additivity="false" level="INFO">
-            <appender-ref ref="MetricsFile"/>
-        </logger>
-        <logger name="io.fabric8.kubernetes.client.Config" level="ERROR" additivity="false">
-            <appender-ref ref="BusinessFile"/>
-        </logger>
         <root level="INFO">
             <appender-ref ref="BusinessFile"/>
+            <appender-ref ref="ConsolePrint"/>
         </root>
     </loggers>
 </configuration>

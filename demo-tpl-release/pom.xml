@@ -4,13 +4,13 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>demo-tpl</artifactId>
-        <groupId>com.douyu.ocean</groupId>
+        <groupId>com.matrix.call</groupId>
         <version>1.0.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.douyu.ocean</groupId>
+    <groupId>com.matrix.call</groupId>
     <artifactId>demo-tpl-release</artifactId>
     <packaging>pom</packaging>
 
@@ -23,7 +23,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.douyu.ocean</groupId>
+            <groupId>com.matrix.call</groupId>
             <artifactId>demo-tpl-core</artifactId>
             <version>1.0.0</version>
         </dependency>
@@ -34,22 +34,50 @@
     <build>
         <plugins>
             <!-- 此插件一定要放在maven-assembly-plugin打包插件上面 -->
-          <!--  <plugin>
-                <groupId>com.douyu.ocean</groupId>
-                <artifactId>detonator</artifactId>
-                <version>2.2.1</version>
-                <configuration>
-                    <scriptFileName>${project.parent.name}</scriptFileName>
-                </configuration>
+            <plugin>
+                <!-- http://mojo.codehaus.org/appassembler/appassembler-maven-plugin/index.html -->
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>appassembler-maven-plugin</artifactId>
+                <version>1.10</version>
                 <executions>
                     <execution>
+                        <id>appassembler</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>detonator</goal>
+                            <goal>assemble</goal>
                         </goals>
+                        <configuration>
+                            <!-- change_1 -->
+                            <configurationSourceDirectory>src/conf</configurationSourceDirectory>
+                            <assembleDirectory>${project.build.directory}/app_run</assembleDirectory>
+                            <programs>
+                                <program>
+                                    <mainClass>com.matrix.call.demo.core.ApplicationLauncher</mainClass>
+                                    <name>${project.parent.artifactId}</name>
+                                    <!-- <commandLineArguments> <commandLineArgument>arg1</commandLineArgument> <commandLineArgument>arg2</commandLineArgument> </commandLineArguments> -->
+                                </program>
+                            </programs>
+                            <!--是否生成lib-->
+                            <generateRepository>false</generateRepository>
+                            <repositoryLayout>flat</repositoryLayout>
+                            <repositoryName>lib</repositoryName>
+                            <useWildcardClassPath>true</useWildcardClassPath>
+                            <!-- Set the target configuration directory to be used in the bin scripts -->
+                            <configurationDirectory>conf</configurationDirectory>
+                            <copyConfigurationDirectory>true</copyConfigurationDirectory>
+                            <!-- Include the target configuration directory in the beginning of the classpath declaration in the bin scripts -->
+                            <includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
+                            <!--<binPrefix>startup</binPrefix>-->
+                            <encoding>${project.build.sourceEncoding}</encoding>
+                            <extraJvmArguments>-Xms512m -Xmx1024m </extraJvmArguments>
+                            <platforms>
+                                <platform>all</platform>
+                            </platforms>
+                        </configuration>
                     </execution>
+
                 </executions>
-            </plugin>-->
+            </plugin>
             <!-- 打包插件 -->
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>

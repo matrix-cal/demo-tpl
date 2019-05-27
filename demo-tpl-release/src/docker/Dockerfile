@@ -1,4 +1,4 @@
-FROM docker-registry1.ocean.douyu.com/java-centos:1.8_162_b12
+FROM java-centos:1.8_162_b12
 
 ADD ./demo-tpl-release/target/demo-tpl-release-@project.version@.tar.gz  /opt
 

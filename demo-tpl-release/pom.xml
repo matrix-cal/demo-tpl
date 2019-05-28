@@ -35,7 +35,7 @@
         <plugins>
             <!-- 此插件一定要放在maven-assembly-plugin打包插件上面 -->
             <plugin>
-                <!-- http://mojo.codehaus.org/appassembler/appassembler-maven-plugin/index.html -->
+                <!-- https://www.mojohaus.org/appassembler/appassembler-maven-plugin/ -->
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>appassembler-maven-plugin</artifactId>
                 <version>1.10</version>

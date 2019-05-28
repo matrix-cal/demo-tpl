@@ -4,7 +4,7 @@
     <id>package</id>
     <formats>
          <format>dir</format>
-        <!--<format>tar.gz</format>-->
+        <format>tar.gz</format>
     </formats>
     <includeBaseDirectory>true</includeBaseDirectory>
     <!-- the root-name of dir or targz -->
@@ -12,7 +12,7 @@
     <fileSets>
 
         <fileSet>
-            <directory>./target/detonator/bin</directory>
+            <directory>./target/app_run/bin</directory>
             <fileMode>0755</fileMode>
             <outputDirectory>bin</outputDirectory>
             <includes>
@@ -25,7 +25,7 @@
             <lineEnding>unix</lineEnding>
         </fileSet>
         <fileSet>
-            <directory>./target/detonator/conf</directory>
+            <directory>./target/app_run/conf</directory>
             <includes>
                 <include>**</include>
             </includes>
@@ -34,12 +34,19 @@
             <lineEnding>unix</lineEnding>
         </fileSet>
         <fileSet>
-            <directory>./target/detonator/plugins</directory>
+            <directory>./target/app_run/plugins</directory>
             <includes>
                 <include>**</include>
             </includes>
             <outputDirectory>plugins</outputDirectory>
         </fileSet>
+        <!--<fileSet>
+            <directory>./target/app_run/lib</directory>
+            <includes>
+                <include>**</include>
+            </includes>
+            <outputDirectory>lib</outputDirectory>
+        </fileSet>-->
 
         <!-- udf -->
         <fileSet>
@@ -80,6 +87,7 @@
         </fileSet>
     </fileSets>
 
+    <!-- 有lib文件夹的关键原来在这-->
     <dependencySets>
         <dependencySet>
             <outputDirectory>lib</outputDirectory>

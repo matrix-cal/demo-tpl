@@ -176,7 +176,7 @@
                             <excludes>
                                 <!--<exclude>filter-job-monitor.ini</exclude>-->
                                 <exclude>log4j2.xml</exclude>
-                                <exclude>application.properties</exclude>
+                                <!--<exclude>application.properties</exclude>-->
                             </excludes>
 
                         </configuration>

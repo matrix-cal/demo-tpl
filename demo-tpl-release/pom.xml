@@ -38,7 +38,7 @@
                 <!-- http://mojo.codehaus.org/appassembler/appassembler-maven-plugin/index.html -->
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>appassembler-maven-plugin</artifactId>
-                <version>1.9</version>
+                <version>1.10</version>
                 <executions>
                     <execution>
                         <id>appassembler</id>
@@ -48,21 +48,17 @@
                         </goals>
                         <configuration>
                             <!-- change_1 -->
-                            <configurationSourceDirectory>src/main/resources</configurationSourceDirectory>
-                            <assembleDirectory>${project.build.directory}/${project.artifactId}_run</assembleDirectory>
+                            <configurationSourceDirectory>src/conf</configurationSourceDirectory>
+                            <assembleDirectory>${project.build.directory}/app_run</assembleDirectory>
                             <programs>
                                 <program>
                                     <mainClass>com.matrix.call.demo.core.ApplicationLauncher</mainClass>
-                                    <name>Application</name>
-                                    <!-- <commandLineArguments> <commandLineArgument>arg1</commandLineArgument> <commandLineArgument>arg2</commandLineArgument> </commandLineArguments> -->
-                                </program>
-                                <program>
-                                    <mainClass>com.citms.emc.Application2</mainClass>
-                                    <name>Application2</name>
+                                    <name>${project.parent.artifactId}</name>
                                     <!-- <commandLineArguments> <commandLineArgument>arg1</commandLineArgument> <commandLineArgument>arg2</commandLineArgument> </commandLineArguments> -->
                                 </program>
                             </programs>
-
+                            <!--是否生成lib-->
+                            <generateRepository>false</generateRepository>
                             <repositoryLayout>flat</repositoryLayout>
                             <repositoryName>lib</repositoryName>
                             <useWildcardClassPath>true</useWildcardClassPath>
@@ -73,71 +69,12 @@
                             <includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
                             <!--<binPrefix>startup</binPrefix>-->
                             <encoding>${project.build.sourceEncoding}</encoding>
-                            <!-- <extraJvmArguments>-Xms768m -Xmx1024m -XX:PermSize=128m -XX:MaxPermSize=256m -XX:NewSize=192m -XX:MaxNewSize=384m </extraJvmArguments> -->
+                            <extraJvmArguments>-Xms512m -Xmx1024m </extraJvmArguments>
                             <platforms>
-                                <platform>windows</platform>
-                                <platform>unix</platform>
+                                <platform>all</platform>
                             </platforms>
                         </configuration>
                     </execution>
-
-
-                    <!-- daemon -->
-                    <execution>
-                        <id>daemonser</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>generate-daemons</goal>
-                        </goals>
-                        <configuration>
-                            <!--change_1 -->
-                            <target>${project.build.directory}/${project.artifactId}_run/daemon</target>
-                            <logsDirectory>logs</logsDirectory>
-                            <configurationSourceDirectory>src/main/resources</configurationSourceDirectory>
-
-                            <configurationDirectory>conf</configurationDirectory>
-                            <copyConfigurationDirectory>true</copyConfigurationDirectory>
-                            <repositoryLayout>flat</repositoryLayout>
-                            <repositoryName>lib</repositoryName>
-                            <useWildcardClassPath>true</useWildcardClassPath>
-                            <encoding>${project.build.sourceEncoding}</encoding>
-                            <daemons>
-                                <daemon>
-                                    <id>${project.artifactId}</id>
-                                    <wrapperMainClass>org.tanukisoftware.wrapper.WrapperSimpleApp</wrapperMainClass>
-                                    <!--change_2 -->
-                                    <mainClass>com.matrix.call.demo.core.ApplicationLauncher</mainClass>
-                                    <commandLineArguments>
-                                        <!-- http://286.iteye.com/blog/1915478 -->
-                                        <commandLineArgument>argument_one</commandLineArgument>
-                                        <commandLineArgument>argument_two</commandLineArgument>
-                                    </commandLineArguments>
-                                    <generatorConfigurations>
-                                        <generatorConfiguration>
-                                            <generator>jsw</generator>
-                                            <includes>
-                                                <include>linux-x86-32</include>
-                                                <include>linux-x86-64</include>
-                                                <include>windows-x86-32</include>
-                                                <include>windows-x86-64</include>
-                                            </includes>
-                                            <configuration>
-                                                <property>
-                                                    <name>wrapper.logfile.loglevel</name>
-                                                    <value>WARN</value>
-                                                </property>
-                                            </configuration>
-                                        </generatorConfiguration>
-                                    </generatorConfigurations>
-                                    <platforms>
-                                        <platform>jsw</platform>
-                                    </platforms>
-                                    <!-- <jvmSettings> <initialMemorySize>768M</initialMemorySize> <maxMemorySize>1024M</maxMemorySize> <maxStackSize>128M</maxStackSize> </jvmSettings> -->
-                                </daemon>
-                            </daemons>
-                        </configuration>
-                    </execution>
-
 
                 </executions>
             </plugin>

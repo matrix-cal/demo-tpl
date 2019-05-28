@@ -30,4 +30,6 @@ target
 .settings
 .classpath
 .project
+logs/
+${sys:app.home}/
 

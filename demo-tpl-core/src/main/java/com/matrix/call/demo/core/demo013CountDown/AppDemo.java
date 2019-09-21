@@ -30,7 +30,7 @@ public class AppDemo {
 
         // 并行任务1
         Runnable t1 = () ->{
-            sleep(100L);
+            sleep(1000L);
             LOGGER.info("任务1完成");
             countDownLatch.countDown();
         };
@@ -40,6 +40,7 @@ public class AppDemo {
             try {
                 // 等待任务1
                 countDownLatch.await();
+                //countDownLatch.await(100L, TimeUnit.MILLISECONDS);
                 long endTime = System.currentTimeMillis();
                 LOGGER.info("任务2完成, 任务1总共耗时: {} ms",(endTime - startTime));
 
@@ -49,13 +50,16 @@ public class AppDemo {
 
         };
 
+
+        //执行任务2
+        consumeExecutorPool.submit(t2);
+        consumeExecutorPool.submit(t2);
+
         //执行任务1
         for (int i = 0; i < 100; i++) {
             consumeExecutorPool.submit(t1);
         }
 
-        //执行任务2
-        consumeExecutorPool.submit(t2);
 
         //关闭线程池
         consumeExecutorPool.shutdown();

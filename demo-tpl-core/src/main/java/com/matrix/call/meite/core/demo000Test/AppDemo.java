@@ -1,5 +1,8 @@
 package com.matrix.call.meite.core.demo000Test;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
 /**
  * Demo000
  *
@@ -9,7 +12,11 @@ package com.matrix.call.meite.core.demo000Test;
 public class AppDemo {
 
     public static void main(String[] args) {
-        System.out.println("hello demo-tpl");
+        System.out.println("{}");
+        String jsonStr = "{\"age\": 23}";
+        JSONObject root = JSON.parseObject(jsonStr);
+        //System.out.println(root.getJSONObject("person").getJSONObject("educate").getString("school"));
+        System.out.println(root.fluentRemove("person"));
 
 
     }

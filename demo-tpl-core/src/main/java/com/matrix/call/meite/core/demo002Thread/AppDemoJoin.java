@@ -41,7 +41,7 @@ public class AppDemoJoin {
         t3.start();
         Thread.yield();
         System.out.println("+++done");
-        System.out.println(AppDemoSyncTest.demoName);
+        //System.out.println(AppDemoJoin.demoName);
     }
 
 }

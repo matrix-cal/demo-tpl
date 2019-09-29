@@ -12,7 +12,7 @@ public class AppDemoJoin {
 
     public static void main(String[] args) {
         Thread t1 = new Thread(() -> {
-            for(int i=0; i< 5; i++) {
+            for(int i=0; i< 10; i++) {
                 System.out.println("t1:" + i);
                 CommonUDFUtils.sleep(100L);
             }
@@ -21,7 +21,7 @@ public class AppDemoJoin {
             try {
                 t1.join();
             } catch (InterruptedException e) {}
-            for(int i=0; i< 5; i++) {
+            for(int i=0; i< 10; i++) {
                 System.out.println("t2:" + i);
                 CommonUDFUtils.sleep(100L);
             }
@@ -30,7 +30,7 @@ public class AppDemoJoin {
             try {
                 t2.join();
             } catch (InterruptedException e) {}
-            for(int i=0; i< 5; i++) {
+            for(int i=0; i< 10; i++) {
                 System.out.println("t3:" + i);
                 CommonUDFUtils.sleep(100L);
             }

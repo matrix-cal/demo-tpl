@@ -11,6 +11,6 @@ public class AppDemo {
     public static void main(String[] args) {
         System.out.println("hello demo-tpl");
 
-        //System.out.println(AppDemoSync.demoName);
+        //System.out.println(AppDemoDeadLock.demoName);
     }
 }

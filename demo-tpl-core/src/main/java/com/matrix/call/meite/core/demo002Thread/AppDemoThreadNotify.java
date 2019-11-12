@@ -14,7 +14,7 @@ import java.util.List;
  * @create 2018-04-18 8:56:00
  */
 public class AppDemoThreadNotify {
-    byte[] lock = new byte[0];
+    volatile byte[] lock = new byte[0];
     public volatile static int Threshold = 20;
 
 

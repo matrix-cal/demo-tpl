@@ -14,7 +14,7 @@ public class AppDemo {
         System.out.println("hello demo-tpl");
         StringBuffer sb = new StringBuffer("aaa");
 
-        long param1 = 1L;
+        Long param1 = 1111L;
         AtomicLong param2 = new AtomicLong(33);
         changeObjVal(param1,param2,  sb);
         System.out.println(param1);
@@ -23,11 +23,17 @@ public class AppDemo {
 
     }
 
-    private static void changeObjVal(long param1, AtomicLong param2 ,StringBuffer sb) {
+    private static void changeObjVal(Long param1, AtomicLong param2 ,StringBuffer sb) {
         param1 = param1 + 888L;
         param2.addAndGet(11);
         sb.append("-changed");
 
+    }
+
+    private static int changeObjVal(long param1, AtomicLong param2 ) {
+        param1 = param1 + 888L;
+        param2.addAndGet(11);
+        return 1;
     }
 
 

@@ -1,7 +1,5 @@
 package com.matrix.call.demo.core.demo000Test;
 
-import java.util.concurrent.atomic.AtomicLong;
-
 /**
  * Demo000
  *
@@ -11,30 +9,14 @@ import java.util.concurrent.atomic.AtomicLong;
 public class AppDemo {
 
     public static void main(String[] args) {
-        System.out.println("hello demo-tpl");
-        StringBuffer sb = new StringBuffer("aaa");
-
-        Long param1 = 1111L;
-        AtomicLong param2 = new AtomicLong(33);
-        changeObjVal(param1,param2,  sb);
-        System.out.println(param1);
-        System.out.println(param2);
-        System.out.println(sb.toString());
-
+        System.out.println("cpuNum:"+ Runtime.getRuntime().availableProcessors());
+        System.out.println("freeMemory:"+ Runtime.getRuntime().freeMemory()/1024/1024);
+        System.out.println("totalMemory:"+ Runtime.getRuntime().totalMemory()/1024/1024);
+        System.out.println("maxMemory:"+ Runtime.getRuntime().maxMemory()/1024/1024);
+        AppDemo appDemo = new AppDemo();
+        appDemo.test();
     }
-
-    private static void changeObjVal(Long param1, AtomicLong param2 ,StringBuffer sb) {
-        param1 = param1 + 888L;
-        param2.addAndGet(11);
-        sb.append("-changed");
-
+    public void test(){
+        System.out.println(this.getClass().getSimpleName());
     }
-
-    private static int changeObjVal(long param1, AtomicLong param2 ) {
-        param1 = param1 + 888L;
-        param2.addAndGet(11);
-        return 1;
-    }
-
-
 }

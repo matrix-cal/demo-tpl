@@ -28,6 +28,7 @@
 	   1122
 	   11
 	   33
+	   44
         -->
         <mysql.version>5.1.38</mysql.version>
         <hibernate.version>5.1.10.Final</hibernate.version>

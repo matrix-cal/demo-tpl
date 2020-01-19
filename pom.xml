@@ -23,7 +23,7 @@
 
     <properties>
         <!--
-           the version is important, update may case data disappear;
+           the version is important, update may case data disappear
            some tip is to remove (characterEncoding=UTF-8) in datasource
         -->
         <mysql.version>5.1.38</mysql.version>

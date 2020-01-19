@@ -26,6 +26,8 @@
            the version is important, update may case data disappear;
 	   some tip is to remove (characterEncoding=UTF-8) in datasource
 	   1122
+	   11
+	   33
         -->
         <mysql.version>5.1.38</mysql.version>
         <hibernate.version>5.1.10.Final</hibernate.version>

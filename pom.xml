@@ -24,7 +24,8 @@
     <properties>
         <!--
            the version is important, update may case data disappear;
-           some tip is to remove (characterEncoding=UTF-8) in datasource
+	   some tip is to remove (characterEncoding=UTF-8) in datasource
+	   11
         -->
         <mysql.version>5.1.38</mysql.version>
         <hibernate.version>5.1.10.Final</hibernate.version>

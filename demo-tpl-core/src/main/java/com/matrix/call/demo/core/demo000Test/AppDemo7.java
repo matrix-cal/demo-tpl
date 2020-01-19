@@ -33,7 +33,7 @@ public class AppDemo7 {
         //map.put("entity.otherName", "bbb");
         String result = StrSubstitutor.replace(test, map);
         System.out.println(result);
-        String format = String.format("%.2f", 12345f);//test
+        String format = String.format("%.2f", 12345f);//test, test2
         System.out.println(format);
     }
 

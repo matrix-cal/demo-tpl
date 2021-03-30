@@ -5,6 +5,7 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
@@ -20,6 +21,7 @@ public class LoginContraller {
 
 
     @RequestMapping("/loginStr")
+    @ResponseBody
     public String sayHello() {
         return "Hello,World! " + DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss.SSS");
     }
